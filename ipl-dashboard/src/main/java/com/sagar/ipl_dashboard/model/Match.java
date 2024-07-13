@@ -2,7 +2,12 @@ package com.sagar.ipl_dashboard.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Match {
+    @Id
     private long id;       
     private String city;
     private LocalDate date;
@@ -42,7 +47,7 @@ public class Match {
     public void setPlayerOfMatch(String playerOfMatch) {
         this.playerOfMatch = playerOfMatch;
     }
-    
+
     public String getTeam1() {
         return team1;
     }
@@ -55,7 +60,7 @@ public class Match {
     public void setTeam2(String team2) {
         this.team2 = team2;
     }
-    public String getTossWinnder() {
+    public String getTossWinner() {
         return tossWinner;
     }
     public void setTossWinner(String tossWinner) {

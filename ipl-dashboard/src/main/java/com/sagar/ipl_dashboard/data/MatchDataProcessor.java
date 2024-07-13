@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 import com.sagar.ipl_dashboard.model.Match;
 
-
 public class MatchDataProcessor implements ItemProcessor<MatchInput, Match> {
 
     private static final Logger log = LoggerFactory.getLogger(MatchDataProcessor.class);
@@ -21,15 +20,17 @@ public class MatchDataProcessor implements ItemProcessor<MatchInput, Match> {
         match.setCity(matchInput.getCity());
         match.setDate(LocalDate.parse(matchInput.getdate()));
         match.setPlayerOfMatch(matchInput.getPlayer_of_match());
-        
+
         String firstInningsTeam, secondInningsTeam;
 
-        if("bat".equals(matchInput.getToss_decision())) {
+        if ("bat".equals(matchInput.getToss_decision())) {
             firstInningsTeam = matchInput.getToss_winner();
-            secondInningsTeam = firstInningsTeam.equals(matchInput.getTeam1()) ? matchInput.getTeam2() : matchInput.getTeam1();
+            secondInningsTeam = firstInningsTeam.equals(matchInput.getTeam1()) ? matchInput.getTeam2()
+                    : matchInput.getTeam1();
         } else {
             secondInningsTeam = matchInput.getToss_winner();
-            firstInningsTeam = secondInningsTeam.equals(matchInput.getTeam1()) ? matchInput.getTeam2() : matchInput.getTeam1();
+            firstInningsTeam = secondInningsTeam.equals(matchInput.getTeam1()) ? matchInput.getTeam2()
+                    : matchInput.getTeam1();
         }
 
         match.setTeam1(firstInningsTeam);
@@ -42,6 +43,6 @@ public class MatchDataProcessor implements ItemProcessor<MatchInput, Match> {
         match.setUmpire2(matchInput.getUmpire2());
 
         return match;
-        
+
     }
 }
