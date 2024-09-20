@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.sagar.ipl_dashboard.model.Team;
+import com.sagar.ipl_dashboard.repository.MatchRepository;
 import com.sagar.ipl_dashboard.service.TeamService;
 
 
@@ -14,10 +15,19 @@ public class TeamController {
 
     @Autowired
     private TeamService teamService; 
+    @Autowired
+    private MatchRepository matchRepository;
 
     @GetMapping("/team/{teamName}")
     public Team getTeam(@PathVariable String teamName) {
-        return teamService.findTeamName(teamName);
+        Team team = teamService.findTeamName(teamName);
+        team.setMatches(matchRepository.findLatestMatchesByTeam(teamName, 4));
+        return team;
+    }
+
+    @GetMapping("/teams")
+    public Iterable<Team> getAllTeams() {
+        return teamService.findAllTeams();
     }
     
 }
