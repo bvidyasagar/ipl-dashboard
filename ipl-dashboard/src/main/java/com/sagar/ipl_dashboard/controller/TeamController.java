@@ -2,6 +2,7 @@ package com.sagar.ipl_dashboard.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -11,6 +12,7 @@ import com.sagar.ipl_dashboard.service.TeamService;
 
 
 @RestController
+@CrossOrigin
 public class TeamController {
 
     @Autowired
